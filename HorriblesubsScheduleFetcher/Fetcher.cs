@@ -40,6 +40,7 @@ namespace HorriblesubsScheduleFetcher
 
         public void FetchScheduleItems()
         {
+            var i = 0;
             foreach (var table in dayScheduleTables)
             {
                 var items = table.Select("tr.schedule-page-item");
@@ -53,12 +54,16 @@ namespace HorriblesubsScheduleFetcher
                     var pstHours = int.Parse(rawTimeString.Split(':')[0]);
                     var pstMinutes = int.Parse(rawTimeString.Split(':')[1]);
 
-                    //var losAngeles = DateTimeZoneProviders.Tzdb["America/Los_Angeles"];
-                    //var time = new ZonedDateTime(new LocalDateTime(1, 1, 1, pstHours, pstMinutes), losAngeles, )
+                    var losAngeles = DateTimeZoneProviders.Tzdb["America/Los_Angeles"];
+                    var time = 
+                        new LocalDateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, pstHours, pstMinutes)
+                        .InZoneStrictly(losAngeles);
 
-                    // I'm too fucking tired right now
-                    // to write code that works with timezones.
+                    var currentItem = new ScheduleItem(title, id, (ScheduleItem.Weekday)i, time);
+                    this.scheduleItems.Add(currentItem);
                 }
+
+                i++;
             }
         }
 

@@ -48,6 +48,15 @@ namespace TestProject
 
             Assert.IsTrue(fetcher.scheduleItems != null);
             Assert.IsTrue(fetcher.scheduleItems.Count > 0);
+
+            foreach (var scheduleItem in fetcher.scheduleItems)
+            {
+                Assert.IsTrue(scheduleItem.seriesName.Trim() != "");
+                Assert.IsTrue(scheduleItem.seriesId.Trim() != "");
+                Assert.IsNotNull(scheduleItem.airTime);
+
+                Console.WriteLine(scheduleItem.ToString());
+            }
         }
     }
 }
