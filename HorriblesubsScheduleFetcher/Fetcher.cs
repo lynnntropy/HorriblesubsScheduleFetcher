@@ -69,7 +69,11 @@ namespace HorriblesubsScheduleFetcher
 
         public List<ScheduleItem> Fetch()
         {
-            return null;
+            this.FetchPage();
+            this.FetchTables();
+            this.FetchScheduleItems();
+
+            return this.scheduleItems;
         }
     }
 }
