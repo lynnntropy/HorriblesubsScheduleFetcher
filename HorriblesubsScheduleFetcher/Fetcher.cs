@@ -12,13 +12,13 @@ namespace HorriblesubsScheduleFetcher
 {
     public class Fetcher
     {
-        private static string SCHEDULE_PAGE_URL = "http://horriblesubs.info/release-schedule/";
+        private const string SCHEDULE_PAGE_URL = "http://horriblesubs.info/release-schedule/";
 
         public Document schedulePage;
         public List<Element> dayScheduleTables = new List<Element>();
         public List<ScheduleItem> scheduleItems = new List<ScheduleItem>();
 
-        public void FetchPage()
+        private void FetchPage()
         {
             using (WebClient webClient = new WebClient())
             {
@@ -27,7 +27,7 @@ namespace HorriblesubsScheduleFetcher
             }
         }
 
-        public void FetchTables()
+        private void FetchTables()
         {
             foreach (var weekdayTable in this.schedulePage.Select("table.schedule-today-table"))
             {
@@ -38,7 +38,7 @@ namespace HorriblesubsScheduleFetcher
             dayScheduleTables.RemoveAt(dayScheduleTables.Count - 1);
         }
 
-        public void FetchScheduleItems()
+        private void FetchScheduleItems()
         {
             var i = 0;
             foreach (var table in dayScheduleTables)
